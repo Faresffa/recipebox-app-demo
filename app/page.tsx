@@ -1,14 +1,18 @@
 import { RecipeCard } from '@/components/recipe-card'
+import { DemoModeToggle } from '@/components/demo-mode-toggle'
 import { SiteHeader } from '@/components/site-header'
+import { getDemoMode } from '@/lib/demo-mode'
 import { recipes } from '@/lib/recipes'
 import { getCurrentUser } from '@/lib/user'
 
 export default async function HomePage() {
   const user = await getCurrentUser()
   const isPro = user?.isPro ?? false
+  const mode = await getDemoMode()
 
   return (
     <div className="min-h-screen bg-neutral-50">
+      <DemoModeToggle mode={mode} />
       <SiteHeader user={user} />
 
       <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
